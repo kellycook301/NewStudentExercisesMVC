@@ -118,24 +118,32 @@ namespace StudentExerciseMVC.Controllers
             using (IDbConnection conn = Connection)
             {
                 Student student = await conn.QueryFirstAsync<Student>(sql);
-                return View(student);
+                StudentEditViewModel model = new StudentEditViewModel(_config);
+                model.student = student;
+                return View(model);
             }
         }
 
         // POST: Students/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, Student student)
+        public async Task<ActionResult> Edit(int id, StudentEditViewModel model)
         {
             try
             {
+                Student student = model.student;
+
                 // TODO: Add update logic here
                 string sql = $@"
                     UPDATE Student
                     SET FirstName = '{student.FirstName}',
                         LastName = '{student.LastName}',
                         SlackHandle = '{student.SlackHandle}',
+<<<<<<< HEAD
                         Cohort = {student.CohortId}
+=======
+                        CohortId = {student.CohortId}
+>>>>>>> 6c54d2a97e33d7a7f7dee3712d9695e35c2c6690
                     WHERE Id = {id}";
 
                 using (IDbConnection conn = Connection)
