@@ -134,7 +134,8 @@ namespace StudentExerciseMVC.Controllers
                     UPDATE Student
                     SET FirstName = '{student.FirstName}',
                         LastName = '{student.LastName}',
-                        SlackHandle = '{student.SlackHandle}'
+                        SlackHandle = '{student.SlackHandle}',
+                        Cohort = {student.CohortId}
                     WHERE Id = {id}";
 
                 using (IDbConnection conn = Connection)
